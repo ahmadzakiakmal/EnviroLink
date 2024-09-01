@@ -5,3 +5,4 @@ EnviroLink is your go-to app for staying informed about weather conditions and a
 ## 👥 Team Members
  - [Ahmad Zaki Akmal](https://github.com/ahmadzakiakmal) (21/480179/TK/52981)
  - [Muhammad Hasnan Regard](https://github.com/heintzz) (21/481381/TK/53135)
+ - [Moh Rizky Arif](https://github.com/dundorma) (21/478613/TK/52741)
