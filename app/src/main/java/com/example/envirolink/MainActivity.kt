@@ -42,11 +42,11 @@ class MainActivity : ComponentActivity() {
                     Column {
                         Row(
                             horizontalArrangement = Arrangement.End,
-                            modifier = Modifier.background(Color(0x20FF0000)).fillMaxWidth().padding(top = 26.dp, start = 20.dp, end = 20.dp)
+                            modifier = Modifier.background(Color(0x10FF0000)).fillMaxWidth().padding(top = 26.dp, start = 20.dp, end = 20.dp)
                         ) {
                            PlaceholderCircle()
                         }
-                        Row(Modifier.background(Color(0x2000FF00)).padding(top = 38.dp, bottom = 70.dp)) {
+                        Row(Modifier.background(Color(0x1000FF00)).padding(top = 38.dp, bottom = 70.dp)) {
                             Text("SLEMAN", textAlign = TextAlign.Center, fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth())
                         }
                     }
