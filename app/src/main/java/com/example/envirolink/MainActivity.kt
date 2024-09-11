@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.envirolink.ui.theme.EnviroLinkTheme
+import com.example.envirolink.ui.theme.InriaSansFamily
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
                            PlaceholderCircle()
                         }
                         Row(Modifier.background(Color(0x1000FF00)).padding(top = 38.dp, bottom = 70.dp)) {
-                            Text("SLEMAN", textAlign = TextAlign.Center, fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth())
+                            Text("SLEMAN", textAlign = TextAlign.Center, fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), fontFamily = InriaSansFamily)
                         }
                     }
                 }
