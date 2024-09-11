@@ -15,6 +15,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -47,8 +51,13 @@ class MainActivity : ComponentActivity() {
                         ) {
                            PlaceholderCircle()
                         }
-                        Row(Modifier.background(Color(0x1000FF00)).padding(top = 38.dp, bottom = 70.dp)) {
-                            Text("SLEMAN", textAlign = TextAlign.Center, fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), fontFamily = InriaSansFamily)
+                        Row(Modifier.background(Color(0x1000FF00)).padding(top = 38.dp, bottom = 70.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                            Text("SLEMAN", textAlign = TextAlign.Center, fontSize = 18.sp, fontWeight = FontWeight.Bold, fontFamily = InriaSansFamily)
+                            Icon(
+                                imageVector = Icons.Filled.KeyboardArrowDown,  // This refers to the Material Design "Favorite" icon
+                                contentDescription = "Dropdown Icon", // Describe the icon for accessibility
+                                tint = Color.Black                      // Optional: Change the color of the icon
+                            )
                         }
                     }
                 }
