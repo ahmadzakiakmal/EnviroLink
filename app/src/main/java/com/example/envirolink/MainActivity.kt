@@ -8,21 +8,32 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.material.icons.filled.WbSunny
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Lightbulb
+import androidx.compose.material.icons.outlined.WbSunny
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -40,23 +51,91 @@ class MainActivity : ComponentActivity() {
         setContent {
             EnviroLinkTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
+                Column(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
                 ) {
-                    Column {
+                    Column(Modifier.weight(1f)) {
                         Row(
                             horizontalArrangement = Arrangement.End,
-                            modifier = Modifier.background(Color(0x10FF0000)).fillMaxWidth().padding(top = 26.dp, start = 20.dp, end = 20.dp)
+                            modifier = Modifier
+                                .background(Color(0x10FF0000))
+                                .fillMaxWidth()
+                                .padding(top = 26.dp, start = 20.dp, end = 20.dp)
                         ) {
-                           PlaceholderCircle()
+                            PlaceholderCircle()
                         }
-                        Row(Modifier.background(Color(0x1000FF00)).padding(top = 38.dp, bottom = 70.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                            Text("SLEMAN", textAlign = TextAlign.Center, fontSize = 18.sp, fontWeight = FontWeight.Bold, fontFamily = InriaSansFamily)
+                        Row(
+                            Modifier
+                                .background(Color(0x1000FF00))
+                                .padding(top = 38.dp, bottom = 70.dp)
+                                .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+                        ) {
+                            Text(
+                                "SLEMAN",
+                                textAlign = TextAlign.Center,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = InriaSansFamily
+                            )
                             Icon(
                                 imageVector = Icons.Filled.KeyboardArrowDown,  // This refers to the Material Design "Favorite" icon
                                 contentDescription = "Dropdown Icon", // Describe the icon for accessibility
                                 tint = Color.Black                      // Optional: Change the color of the icon
+                            )
+                        }
+                    }
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .background(Color(0x1000FF00))
+                            .padding(10.dp),
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
+                        Button(
+                            onClick = { /*TODO*/ },
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(50.dp)
+                                .align(Alignment.CenterVertically),
+                            contentPadding = PaddingValues(0.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                contentColor = Color(0xFF539DF3),
+                                containerColor = Color(0xFFc0dbfb)
+                            )
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Home,
+                                contentDescription = "Home",
+                                Modifier.size(22.dp)
+                            )
+                        }
+                        Button(
+                            onClick = { /*TODO*/ },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.White,
+                                contentColor = Color.Black,
+                            ),
+                            modifier = Modifier.size(50.dp),
+                            contentPadding = PaddingValues(0.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.WbSunny,
+                                contentDescription = "Weather",
+                                Modifier.size(22.dp)
+                            )
+                        }
+                        Button(
+                            onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.White,
+                                contentColor = Color.Black
+                            ),
+                            modifier = Modifier.size(50.dp),
+                            contentPadding = PaddingValues(0.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Lightbulb,
+                                contentDescription = "Articles",
+                                Modifier.size(22.dp)
                             )
                         }
                     }
@@ -73,6 +152,7 @@ fun PlaceholderCircle() {
             .clip(CircleShape)
             .background(Color(0xFFD9D9D9))
             .width(50.dp)
-            .height(50.dp)) {
+            .height(50.dp)
+    ) {
     }
 }
