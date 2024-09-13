@@ -36,6 +36,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -87,8 +88,9 @@ class MainActivity : ComponentActivity() {
                     Row(
                         Modifier
                             .fillMaxWidth()
-                            .background(Color(0x1000FF00))
+                            .background(Color.White)
                             .padding(10.dp),
+//                            .shadow(elevation = 5.dp),
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         Button(
