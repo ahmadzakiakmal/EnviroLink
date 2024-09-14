@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -84,8 +86,20 @@ class MainActivity : ComponentActivity() {
                                 tint = Color.Black                      // Optional: Change the color of the icon
                             )
                         }
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceAround,
+                            modifier = Modifier
+                                .background(Color(0x100000FF))
+                                .fillMaxWidth()
+                        ) {
+                            DayBox(today = false)
+                            DayBox(today = true)
+                            DayBox(today = false)
+                            DayBox(today = false)
+                        }
                     }
-                    Row(
+
+                    Row( // Navbar
                         Modifier
                             .fillMaxWidth()
                             .background(Color.White)
@@ -156,5 +170,44 @@ fun PlaceholderCircle() {
             .width(50.dp)
             .height(50.dp)
     ) {
+    }
+}
+
+@Composable
+fun DayBox(today: Boolean) {
+    Column(
+        modifier = Modifier
+            .background(Color.White)
+            .width(64.dp)
+            .padding(top = 18.dp, bottom = 22.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("DAY", fontFamily = InriaSansFamily, fontSize = 14.sp)
+        Text(
+            "14/09",
+            fontSize = 12.sp,
+            fontFamily = InriaSansFamily,
+        )
+        Box(
+            Modifier
+                .padding(14.dp)
+                .clip(CircleShape)
+                .size(30.dp)
+                .background(Color(0xFFD9D9D9))
+        )
+        Text("22° C", fontSize = 19.sp, fontFamily = InriaSansFamily, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(13.dp))
+        Box(
+            Modifier
+                .clip(RoundedCornerShape(7.dp))
+                .background(Color(0xFF8E8D88))
+        ) {
+            Text(
+                "192",
+                color = Color.White,
+                modifier = Modifier
+                    .padding(vertical = 4.dp, horizontal = 7.dp)
+            )
+        }
     }
 }
