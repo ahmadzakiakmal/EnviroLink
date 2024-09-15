@@ -14,13 +14,17 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.ui.draw.clip
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.compose.runtime.getValue
 
 @Composable
 fun BottomNavBar(
-    onHomeClick: () -> Unit,
-    onWeatherClick: () -> Unit,
-    onArticlesClick: () -> Unit
+   navController: NavController
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -35,15 +39,15 @@ fun BottomNavBar(
         ) {
             // Home Button
             Button(
-                onClick = onHomeClick,
+                onClick =  { navController.navigate("home") },
                 modifier = Modifier
                     .clip(CircleShape)
                     .size(50.dp)
                     .align(Alignment.CenterVertically),
                 contentPadding = PaddingValues(0.dp),
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color(0xFF539DF3),
-                    containerColor = Color(0xFFc0dbfb)
+                    contentColor = if (currentRoute == "home") Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (currentRoute == "home") Color(0xFFc0dbfb) else Color.White
                 )
             ) {
                 Icon(
@@ -55,10 +59,10 @@ fun BottomNavBar(
 
             // Weather Button
             Button(
-                onClick = onWeatherClick,
+                onClick =  { navController.navigate("weather") },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color.Black
+                    contentColor = if (currentRoute == "weather") Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (currentRoute == "weather") Color(0xFFc0dbfb) else Color.White
                 ),
                 modifier = Modifier.size(50.dp),
                 contentPadding = PaddingValues(0.dp)
@@ -72,10 +76,10 @@ fun BottomNavBar(
 
             // Articles Button
             Button(
-                onClick = onArticlesClick,
+                onClick = { navController.navigate("tips") },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color.Black
+                    contentColor = if (currentRoute == "tips") Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (currentRoute == "tips") Color(0xFFc0dbfb) else Color.White
                 ),
                 modifier = Modifier.size(50.dp),
                 contentPadding = PaddingValues(0.dp)
