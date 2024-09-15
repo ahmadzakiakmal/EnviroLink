@@ -47,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
+import com.example.envirolink.ui.theme.InterFamily
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,14 +88,17 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         Row(
-                            horizontalArrangement = Arrangement.SpaceAround,
+                            horizontalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .background(Color(0x100000FF))
                                 .fillMaxWidth()
                         ) {
                             DayBox(today = false)
+                            Spacer(Modifier.width(30.dp))
                             DayBox(today = true)
+                            Spacer(Modifier.width(30.dp))
                             DayBox(today = false)
+                            Spacer(Modifier.width(30.dp))
                             DayBox(today = false)
                         }
                     }
@@ -102,9 +106,13 @@ class MainActivity : ComponentActivity() {
                     Row( // Navbar
                         Modifier
                             .fillMaxWidth()
+                            .shadow(
+                                elevation = 5.dp,
+                                shape = RoundedCornerShape(12.dp),
+                                clip = false
+                            )
                             .background(Color.White)
-                            .padding(10.dp),
-//                            .shadow(elevation = 5.dp),
+                            .padding(vertical = 10.dp),
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         Button(
@@ -177,16 +185,22 @@ fun PlaceholderCircle() {
 fun DayBox(today: Boolean) {
     Column(
         modifier = Modifier
-            .background(Color.White)
+            .background(if (!today) Color.White else Color(0xFFA8A8A8))
             .width(64.dp)
             .padding(top = 18.dp, bottom = 22.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("DAY", fontFamily = InriaSansFamily, fontSize = 14.sp)
+        Text(
+            "DAY",
+            fontFamily = InriaSansFamily,
+            fontSize = 14.sp,
+            color = if (!today) Color.Black else Color.White
+        )
         Text(
             "14/09",
             fontSize = 12.sp,
             fontFamily = InriaSansFamily,
+            color = if (!today) Color(0xFFA0A7BA) else Color.Black
         )
         Box(
             Modifier
@@ -195,7 +209,13 @@ fun DayBox(today: Boolean) {
                 .size(30.dp)
                 .background(Color(0xFFD9D9D9))
         )
-        Text("22° C", fontSize = 19.sp, fontFamily = InriaSansFamily, fontWeight = FontWeight.Bold)
+        Text(
+            "22° C",
+            fontSize = 19.sp,
+            fontFamily = InterFamily,
+            fontWeight = FontWeight.Bold,
+            color = if (!today) Color.Black else Color.White
+        )
         Spacer(Modifier.height(13.dp))
         Box(
             Modifier
@@ -205,6 +225,7 @@ fun DayBox(today: Boolean) {
             Text(
                 "192",
                 color = Color.White,
+                fontFamily = InterFamily,
                 modifier = Modifier
                     .padding(vertical = 4.dp, horizontal = 7.dp)
             )

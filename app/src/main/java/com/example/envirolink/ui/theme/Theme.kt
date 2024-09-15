@@ -25,6 +25,10 @@ val InriaSansFamily = FontFamily(
     Font(R.font.inria_sans_bold, FontWeight.Bold)
 )
 
+val InterFamily = FontFamily(
+    Font(R.font.inter)
+)
+
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
