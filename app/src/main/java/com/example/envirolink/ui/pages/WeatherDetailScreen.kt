@@ -37,7 +37,6 @@ import androidx.compose.ui.unit.sp
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
 
-@Preview(showBackground = true)
 @Composable
 fun WeatherDetailScreen(){
     EnviroLinkTheme {
@@ -193,4 +192,10 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
         Spacer(modifier = Modifier.height(4.dp))
         Text(text = value, fontSize = 14.sp, color = Color.Gray)
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewWeatherDetailScreen(){
+    WeatherDetailScreen()
 }
