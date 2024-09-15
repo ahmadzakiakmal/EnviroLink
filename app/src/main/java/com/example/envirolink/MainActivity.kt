@@ -17,8 +17,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -55,112 +57,135 @@ class MainActivity : ComponentActivity() {
         setContent {
             EnviroLinkTheme {
                 // A surface container using the 'background' color from the theme
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    Column(Modifier.weight(1f)) {
-                        Row(
-                            horizontalArrangement = Arrangement.End,
-                            modifier = Modifier
-                                .background(Color(0x10FF0000))
-                                .fillMaxWidth()
-                                .padding(top = 26.dp, start = 20.dp, end = 20.dp)
-                        ) {
-                            PlaceholderCircle()
-                        }
-                        Row(
-                            Modifier
-                                .background(Color(0x1000FF00))
-                                .padding(top = 38.dp, bottom = 70.dp)
-                                .fillMaxWidth(), horizontalArrangement = Arrangement.Center
-                        ) {
-                            Text(
-                                "SLEMAN",
-                                textAlign = TextAlign.Center,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Bold,
-                                fontFamily = InriaSansFamily
-                            )
-                            Icon(
-                                imageVector = Icons.Filled.KeyboardArrowDown,  // This refers to the Material Design "Favorite" icon
-                                contentDescription = "Dropdown Icon", // Describe the icon for accessibility
-                                tint = Color.Black                      // Optional: Change the color of the icon
-                            )
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.Center,
-                            modifier = Modifier
-                                .background(Color(0x100000FF))
-                                .fillMaxWidth()
-                        ) {
-                            DayBox(today = false)
-                            Spacer(Modifier.width(30.dp))
-                            DayBox(today = true)
-                            Spacer(Modifier.width(30.dp))
-                            DayBox(today = false)
-                            Spacer(Modifier.width(30.dp))
-                            DayBox(today = false)
-                        }
-                    }
-
-                    Row( // Navbar
-                        Modifier
-                            .fillMaxWidth()
-                            .shadow(
-                                elevation = 5.dp,
-                                shape = RoundedCornerShape(12.dp),
-                                clip = false
-                            )
-                            .background(Color.White)
-                            .padding(vertical = 10.dp),
-                        horizontalArrangement = Arrangement.SpaceAround
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
                     ) {
-                        Button(
-                            onClick = { /*TODO*/ },
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .size(50.dp)
-                                .align(Alignment.CenterVertically),
-                            contentPadding = PaddingValues(0.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                contentColor = Color(0xFF539DF3),
-                                containerColor = Color(0xFFc0dbfb)
-                            )
+                        Column(
+                            Modifier
+                                .weight(1f)
+                                .verticalScroll(rememberScrollState())
                         ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Home,
-                                contentDescription = "Home",
-                                Modifier.size(22.dp)
-                            )
+                            Row(
+                                horizontalArrangement = Arrangement.End,
+                                modifier = Modifier
+                                    .background(Color(0x10FF0000))
+                                    .fillMaxWidth()
+                                    .padding(top = 26.dp, start = 20.dp, end = 20.dp)
+                            ) {
+                                PlaceholderCircle()
+                            }
+                            Row(
+                                Modifier
+                                    .background(Color(0x1000FF00))
+                                    .padding(top = 38.dp, bottom = 70.dp)
+                                    .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    "SLEMAN",
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = InriaSansFamily
+                                )
+                                Icon(
+                                    imageVector = Icons.Filled.KeyboardArrowDown,  // This refers to the Material Design "Favorite" icon
+                                    contentDescription = "Dropdown Icon", // Describe the icon for accessibility
+                                    tint = Color.Black                      // Optional: Change the color of the icon
+                                )
+                            }
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                modifier = Modifier
+                                    .background(Color(0x100000FF))
+                                    .fillMaxWidth()
+                                    .padding(bottom = 44.dp)
+                            ) {
+                                DayBox(today = false)
+                                Spacer(Modifier.width(30.dp))
+                                DayBox(today = true)
+                                Spacer(Modifier.width(30.dp))
+                                DayBox(today = false)
+                                Spacer(Modifier.width(30.dp))
+                                DayBox(today = false)
+                            }
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Box(
+                                    Modifier
+                                        .clip(
+                                            CircleShape
+                                        )
+                                        .background(Color(0xFFD9D9D9))
+                                        .size(240.dp)
+                                )
+                            }
                         }
-                        Button(
-                            onClick = { /*TODO*/ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.White,
-                                contentColor = Color.Black,
-                            ),
-                            modifier = Modifier.size(50.dp),
-                            contentPadding = PaddingValues(0.dp)
+
+                        Row(
+                            // Navbar
+                            Modifier
+                                .fillMaxWidth()
+                                .shadow(
+                                    elevation = 5.dp,
+                                    shape = RoundedCornerShape(12.dp),
+                                    clip = false
+                                )
+                                .background(Color.White)
+                                .padding(vertical = 10.dp),
+                            horizontalArrangement = Arrangement.SpaceAround,
                         ) {
-                            Icon(
-                                imageVector = Icons.Outlined.WbSunny,
-                                contentDescription = "Weather",
-                                Modifier.size(22.dp)
-                            )
-                        }
-                        Button(
-                            onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.White,
-                                contentColor = Color.Black
-                            ),
-                            modifier = Modifier.size(50.dp),
-                            contentPadding = PaddingValues(0.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Lightbulb,
-                                contentDescription = "Articles",
-                                Modifier.size(22.dp)
-                            )
+                            Button(
+                                onClick = { /*TODO*/ },
+                                modifier = Modifier
+                                    .clip(CircleShape)
+                                    .size(50.dp)
+                                    .align(Alignment.CenterVertically),
+                                contentPadding = PaddingValues(0.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    contentColor = Color(0xFF539DF3),
+                                    containerColor = Color(0xFFc0dbfb)
+                                )
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Home,
+                                    contentDescription = "Home",
+                                    Modifier.size(22.dp)
+                                )
+                            }
+                            Button(
+                                onClick = { /*TODO*/ },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Black,
+                                ),
+                                modifier = Modifier.size(50.dp),
+                                contentPadding = PaddingValues(0.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.WbSunny,
+                                    contentDescription = "Weather",
+                                    Modifier.size(22.dp)
+                                )
+                            }
+                            Button(
+                                onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Black
+                                ),
+                                modifier = Modifier.size(50.dp),
+                                contentPadding = PaddingValues(0.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Lightbulb,
+                                    contentDescription = "Articles",
+                                    Modifier.size(22.dp)
+                                )
+                            }
                         }
                     }
                 }
