@@ -27,7 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -40,7 +39,7 @@ import com.example.envirolink.ui.theme.InriaSansFamily
 
 @Preview(showBackground = true)
 @Composable
-fun DetailWeatherScreen(){
+fun WeatherDetailScreen(){
     EnviroLinkTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -81,6 +80,7 @@ fun DetailWeatherScreen(){
         }
     }
 }
+
 @Composable
 fun CurrentWeather(){
     Card(
@@ -96,7 +96,8 @@ fun CurrentWeather(){
             Box(
                 modifier = Modifier.fillMaxSize()
             ){
-                Text(modifier = Modifier.height(100.dp).wrapContentHeight(Alignment.Top).align(Alignment.TopEnd),
+                Text(modifier = Modifier.height(100.dp).wrapContentHeight(Alignment.Top).align(
+                    Alignment.TopEnd),
                     text = "27°",
                     fontFamily = InriaSansFamily,
                     fontWeight = FontWeight.Bold,
