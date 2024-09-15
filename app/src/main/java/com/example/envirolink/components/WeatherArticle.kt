@@ -13,7 +13,6 @@ fun ArticleItem(title: String, publisher: String, date: String) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
-            .requiredWidth(200.dp) // Set your minimum width here
     ) {
         Column(
             modifier = Modifier.padding(16.dp)

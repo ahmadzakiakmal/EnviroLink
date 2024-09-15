@@ -9,12 +9,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
 
 @Composable
-fun WeatherTipsScreen() {
+fun WeatherTipsScreen(navController: NavController) {
     EnviroLinkTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -68,17 +69,7 @@ fun WeatherTipsScreen() {
                 }
             }
 
-            BottomNavBar(
-                onHomeClick = {
-                    // TODO: Handle home button click
-                },
-                onWeatherClick = {
-                    // TODO: Handle weather button click
-                },
-                onArticlesClick = {
-                    // TODO: Handle articles button click
-                }
-            )
+            BottomNavBar(navController)
         }
     }
 
