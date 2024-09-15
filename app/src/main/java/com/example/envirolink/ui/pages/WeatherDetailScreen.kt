@@ -30,15 +30,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
 
 @Composable
-fun WeatherDetailScreen(){
+fun WeatherDetailScreen(navController: NavController){
     EnviroLinkTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -77,6 +78,8 @@ fun WeatherDetailScreen(){
                 }
             }
         }
+
+        BottomNavBar(navController = navController)
     }
 }
 
@@ -194,8 +197,9 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewWeatherDetailScreen(){
-    WeatherDetailScreen()
-}
+// tak komen dulu karena butuh parameter :D
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewWeatherDetailScreen(){
+//    WeatherDetailScreen()
+//}

@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.envirolink.ui.pages.HomeScreen
+import com.example.envirolink.ui.pages.WeatherDetailScreen
 import com.example.envirolink.ui.pages.WeatherTipsScreen
 import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.ui.theme.InterFamily
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
 
             NavHost(navController = navController, startDestination = "home") {
                 composable("home") { HomeScreen(navController) }
-                composable("weather") { Text(text = "Detail cuaca") }
+                composable("weather") { WeatherDetailScreen(navController) }
                 composable("tips") { WeatherTipsScreen(navController) }
             }
         }
