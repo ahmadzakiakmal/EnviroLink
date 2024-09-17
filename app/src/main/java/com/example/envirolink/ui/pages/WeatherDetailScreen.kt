@@ -37,9 +37,10 @@ import androidx.navigation.NavController
 import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
+import com.example.envirolink.ui.theme.InterFamily
 
 @Composable
-fun WeatherDetailScreen(navController: NavController){
+fun WeatherDetailScreen(navController: NavController) {
     EnviroLinkTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -84,7 +85,7 @@ fun WeatherDetailScreen(navController: NavController){
 }
 
 @Composable
-fun CurrentWeather(){
+fun CurrentWeather() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -97,11 +98,16 @@ fun CurrentWeather(){
         ) {
             Box(
                 modifier = Modifier.fillMaxSize()
-            ){
-                Text(modifier = Modifier.height(100.dp).wrapContentHeight(Alignment.Top).align(
-                    Alignment.TopEnd),
+            ) {
+                Text(
+                    modifier = Modifier
+                        .height(100.dp)
+                        .wrapContentHeight(Alignment.Top)
+                        .align(
+                            Alignment.TopEnd
+                        ),
                     text = "27°",
-                    fontFamily = InriaSansFamily,
+                    fontFamily = InterFamily,
                     fontWeight = FontWeight.Bold,
                     fontSize = 10.em
                 )
