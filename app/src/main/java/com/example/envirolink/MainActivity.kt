@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.envirolink.ui.pages.HomeScreen
@@ -107,5 +108,17 @@ fun DayBox(today: Boolean) {
                     .padding(vertical = 4.dp, horizontal = 7.dp)
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewWeatherDetailScreen() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "home") {
+        composable("home") { HomeScreen(navController) }
+        composable("weather") { WeatherDetailScreen(navController) }
+        composable("tips") { WeatherTipsScreen(navController) }
     }
 }

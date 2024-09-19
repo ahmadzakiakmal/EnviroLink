@@ -24,9 +24,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.envirolink.DayBox
 import com.example.envirolink.PlaceholderCircle
 import com.example.envirolink.components.BottomNavBar
@@ -34,14 +36,15 @@ import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController = rememberNavController()) {
     EnviroLinkTheme {
         // A surface container using the 'background' color from the theme
         Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
+                    .verticalScroll(rememberScrollState())
+                    .background(Color(0xFFFFFFFF)),
             ) {
                 Column(
                     Modifier
@@ -51,7 +54,7 @@ fun HomeScreen(navController: NavController) {
                     Row(
                         horizontalArrangement = Arrangement.End,
                         modifier = Modifier
-                            .background(Color(0x10FF0000))
+                            .background(Color(0xFFFFFFFF))
                             .fillMaxWidth()
                             .padding(top = 26.dp, start = 20.dp, end = 20.dp)
                     ) {
@@ -59,7 +62,7 @@ fun HomeScreen(navController: NavController) {
                     }
                     Row(
                         Modifier
-                            .background(Color(0x1000FF00))
+                            .background(Color(0xFFFFFFFF))
                             .padding(top = 38.dp, bottom = 70.dp)
                             .fillMaxWidth(), horizontalArrangement = Arrangement.Center
                     ) {
@@ -79,7 +82,7 @@ fun HomeScreen(navController: NavController) {
                     Row(
                         horizontalArrangement = Arrangement.Center,
                         modifier = Modifier
-                            .background(Color(0x100000FF))
+                            .background(Color(0xFFFFFFFF))
                             .fillMaxWidth()
                             .padding(bottom = 44.dp)
                     ) {
@@ -93,7 +96,9 @@ fun HomeScreen(navController: NavController) {
                     }
                     Row(
                         horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color(0xFFFFFFFF))
                     ) {
                         Box(
                             Modifier
@@ -110,4 +115,10 @@ fun HomeScreen(navController: NavController) {
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewHomeScreen() {
+    HomeScreen()
 }
