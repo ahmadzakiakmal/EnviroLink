@@ -1,5 +1,6 @@
 package com.example.envirolink.ui.pages
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.runtime.Composable
 import com.example.envirolink.components.ArticleItem
@@ -8,8 +9,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
@@ -18,7 +22,7 @@ import com.example.envirolink.ui.theme.InriaSansFamily
 fun WeatherTipsScreen(navController: NavController) {
     EnviroLinkTheme {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().background(Color.White)
         ) {
             LazyColumn(
                 modifier = Modifier
@@ -72,5 +76,10 @@ fun WeatherTipsScreen(navController: NavController) {
             BottomNavBar(navController)
         }
     }
+}
 
+@Preview
+@Composable
+fun PreviewWeatherTipsScreen() {
+    WeatherTipsScreen(navController = rememberNavController())
 }
