@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -115,12 +116,15 @@ fun CurrentWeather() {
                 )
             }
             Text(
-                text = "Lorem",
-                fontFamily = InriaSansFamily
+                text = "LOREM",
+                fontFamily = InterFamily,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
             )
             Text(
                 text = "Senin, 09/24",
-                fontFamily = InriaSansFamily
+                fontFamily = InterFamily,
+                fontSize = 16.sp
             )
         }
     }
@@ -130,7 +134,7 @@ fun CurrentWeather() {
 fun WeatherDetails() {
     Column(
         modifier = Modifier
-            .background(Color.White)
+            .background(Color(0xFFF4F4F4))
             .padding(16.dp)
             .fillMaxWidth()
     ) {
@@ -138,38 +142,49 @@ fun WeatherDetails() {
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            WeatherDetailItem(icon = Icons.Default.Air, "9 km/h")
-            WeatherDetailItem(icon = Icons.Default.InvertColors, "0.9")
-            WeatherDetailItem(icon = Icons.Default.CloudQueue, "30%")
+            WeatherDetailItem(icon = Icons.Default.Air, "29", unit = "km/h")
+            WeatherDetailItem(icon = Icons.Default.InvertColors, "0.9", unit = "%")
+            WeatherDetailItem(icon = Icons.Default.CloudQueue, "30", unit = "%")
         }
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(25.dp))
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            WeatherDetailItem(icon = Icons.Default.WbSunny, "3")
-            WeatherDetailItem(icon = Icons.Default.Thermostat, "26.5°")
-            WeatherDetailItem(icon = Icons.Default.Visibility, "50")
+            WeatherDetailItem(icon = Icons.Default.WbSunny, "3", "")
+            WeatherDetailItem(icon = Icons.Default.Thermostat, "26.5°", "")
+            WeatherDetailItem(icon = Icons.Default.Visibility, "50", "")
         }
     }
 }
 
 @Composable
-fun WeatherDetailItem(icon: ImageVector, text: String) {
+fun WeatherDetailItem(icon: ImageVector, value: String, unit: String) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.width(60.dp)
     ) {
         Icon(
             imageVector = icon,
             contentDescription = "Weather Detail Icon",
             modifier = Modifier.size(24.dp),
-            tint = Color.Gray
+            tint = Color(0xFF6C757E)
         )
-        Text(
-            text = text,
-            fontSize = 14.sp,
-            color = Color.Gray
-        )
+        Text("Lorem", color = Color(0xFFCDD2DE))
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = value,
+                fontSize = 16.sp,
+                color = Color(0xFF333333),
+                fontFamily = InterFamily,
+                fontWeight = FontWeight.SemiBold
+            )
+            Text(
+                text = if (unit !== "") "($unit)" else "",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
+            )
+        }
     }
 }
 
@@ -207,6 +222,6 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWeatherDetailScreen(){
+fun PreviewWeatherDetailScreen() {
     WeatherDetailScreen(navController = rememberNavController())
 }
