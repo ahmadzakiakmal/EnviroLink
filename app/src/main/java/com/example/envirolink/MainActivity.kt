@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.envirolink.ui.pages.ArticleDetailScreen
 import com.example.envirolink.ui.pages.HomeScreen
 import com.example.envirolink.ui.pages.WeatherDetailScreen
 import com.example.envirolink.ui.pages.WeatherTipsScreen
@@ -42,6 +43,10 @@ class MainActivity : ComponentActivity() {
                 composable("home") { HomeScreen(navController) }
                 composable("weather") { WeatherDetailScreen(navController) }
                 composable("tips") { WeatherTipsScreen(navController) }
+                composable("article/{articleId}") { backStackEntry ->
+                    val articleId = backStackEntry.arguments?.getString("articleId")
+                    ArticleDetailScreen(articleId = articleId ?: "", navigateBack = {  navController.popBackStack()  })
+                }
             }
         }
     }
@@ -120,5 +125,9 @@ fun PreviewWeatherDetailScreen() {
         composable("home") { HomeScreen(navController) }
         composable("weather") { WeatherDetailScreen(navController) }
         composable("tips") { WeatherTipsScreen(navController) }
+        composable("article/{articleId}") { backStackEntry ->
+            val articleId = backStackEntry.arguments?.getString("articleId")
+            ArticleDetailScreen(articleId = articleId ?: "", navigateBack = { navController.popBackStack() })
+        }
     }
 }
