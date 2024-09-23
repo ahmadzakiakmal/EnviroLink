@@ -60,15 +60,15 @@ fun WeatherTipsScreen(navController: NavController) {
                         Spacer(modifier = Modifier.height(8.dp))
 
                         // Add the list of articles
-                        ArticleItem(title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
-                        ArticleItem(title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
-                        ArticleItem(title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
+                        ArticleItem(articleId= "2024001", navController = navController, title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
                     }
                 }
             }
