@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -207,16 +208,34 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .background(
-                if (isSelected) Color.Gray else Color.LightGray,
-                CircleShape
+                if (isSelected) Color.Gray else Color.LightGray
             )
-            .padding(8.dp)
+            .padding(top = 18.dp, bottom = 18.dp, start = 9.dp, end = 9.dp)
+            .width(63.dp)
     ) {
+        Text(
+            "Lorem",
+            fontSize = 14.sp,
+            fontFamily = InterFamily,
+            modifier = Modifier.padding(bottom = 3.dp)
+        )
         Text(text = date, fontSize = 14.sp, color = Color.Gray)
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(text = temp, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.DarkGray)
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(text = value, fontSize = 14.sp, color = Color.Gray)
+        Spacer(modifier = Modifier.height(14.dp))
+        Box(
+            Modifier
+                .clip(CircleShape)
+                .background(Color(0xFFD9D9D9))
+                .size(40.dp))
+        Spacer(modifier = Modifier.height(14.dp))
+        Text(
+            text = temp,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = if (isSelected) Color.White else Color.DarkGray,
+            fontFamily = InterFamily,
+        )
+        Spacer(modifier = Modifier.height(14.dp))
+        Text(text = value, fontSize = 14.sp, color = if (isSelected) Color.White else Color.DarkGrays)
     }
 }
 
