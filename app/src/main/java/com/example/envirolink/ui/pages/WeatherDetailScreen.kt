@@ -235,7 +235,7 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
             fontFamily = InterFamily,
         )
         Spacer(modifier = Modifier.height(14.dp))
-        Text(text = value, fontSize = 14.sp, color = if (isSelected) Color.White else Color.DarkGrays)
+        Text(text = value, fontSize = 14.sp, color = if (isSelected) Color.White else Color.DarkGray)
     }
 }
 
