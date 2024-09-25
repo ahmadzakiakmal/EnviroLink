@@ -5,9 +5,6 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,70 +21,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import com.example.envirolink.ui.pages.ArticleDetailScreen
 import com.example.envirolink.ui.pages.HomeScreen
-import com.example.envirolink.ui.pages.WeatherDetailScreen
-import com.example.envirolink.ui.pages.WeatherTipsScreen
 import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.ui.theme.InterFamily
+import com.example.envirolink.components.BottomNavBar
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Lifecycle", "Creating Activity")
+        val aqi = Random.nextInt(78, 198)
         setContent {
-            val navController = rememberNavController()
-
-            val randomInteger = Random.nextInt(29, 39)
-
-            NavHost(navController = navController, startDestination = "home") {
-                composable("home") { HomeScreen(navController) }
-                composable("weather") {
-                    WeatherDetailScreen(
-                        navController,
-                        temperature = randomInteger
-                    )
-                }
-                composable("tips") { WeatherTipsScreen(navController) }
-                composable("article/{articleId}") { backStackEntry ->
-                    val articleId = backStackEntry.arguments?.getString("articleId")
-                    ArticleDetailScreen(
-                        articleId = articleId ?: "",
-                        navigateBack = { navController.popBackStack() })
-                }
-            }
+            HomeScreen(aqi)
+            BottomNavBar(context = this)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("Lifecycle", "Starting Activity")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("Lifecycle", "Pausing Activity")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("Lifecycle", "Stopping Activity")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("Lifecycle", "Destroying Activity")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("Lifecycle", "Resuming Activity")
+        val aqi = Random.nextInt(78, 198)
+        Log.d("Lifecycle", "Resume Activity, new AQI value: $aqi")
+        setContent {
+            HomeScreen(aqi)
+            BottomNavBar(context = this)
+        }
     }
 }
 
@@ -155,20 +114,21 @@ fun DayBox(today: Boolean) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewWeatherDetailScreen() {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "home") {
-        composable("home") { HomeScreen(navController) }
-        composable("weather") { WeatherDetailScreen(navController) }
-        composable("tips") { WeatherTipsScreen(navController) }
-        composable("article/{articleId}") { backStackEntry ->
-            val articleId = backStackEntry.arguments?.getString("articleId")
-            ArticleDetailScreen(
-                articleId = articleId ?: "",
-                navigateBack = { navController.popBackStack() })
-        }
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewWeatherDetailScreen() {
+//    val navController = rememberNavController()
+//    val weatherCondition = mutableStateOf("Sunny")
+//
+//    NavHost(navController = navController, startDestination = "home") {
+//        composable("home") { HomeScreen(navController) }
+//        composable("weather") { WeatherDetailScreen(navController) }
+//        composable("tips") { WeatherTipsScreen(navController, weatherCondition) }
+//        composable("article/{articleId}") { backStackEntry ->
+//            val articleId = backStackEntry.arguments?.getString("articleId")
+//            ArticleDetailScreen(
+//                articleId = articleId ?: "",
+//                navigateBack = { navController.popBackStack() })
+//        }
+//    }
+//}

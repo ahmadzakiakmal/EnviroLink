@@ -32,20 +32,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import androidx.core.text.util.LocalePreferences
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.ui.theme.EnviroLinkTheme
-import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.ui.theme.InterFamily
+import kotlin.random.Random
 
 @Composable
-fun WeatherDetailScreen(navController: NavController, temperature: Int = 0) {
+fun WeatherDetailScreen(temperature: Int) {
     EnviroLinkTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -84,8 +79,6 @@ fun WeatherDetailScreen(navController: NavController, temperature: Int = 0) {
                 }
             }
         }
-
-        BottomNavBar(navController = navController)
     }
 }
 
@@ -245,8 +238,8 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewWeatherDetailScreen() {
-    WeatherDetailScreen(navController = rememberNavController())
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewWeatherDetailScreen() {
+//    WeatherDetailScreen(navController = rememberNavController())
+//}

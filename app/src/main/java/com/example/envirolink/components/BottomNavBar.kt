@@ -1,5 +1,7 @@
 package com.example.envirolink.components
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -14,16 +16,16 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.ui.draw.clip
-import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
+import com.example.envirolink.activity.HomeActivity
+import com.example.envirolink.activity.WeatherActivity
+import com.example.envirolink.activity.WeatherTipsActivity
 
 @Composable
 fun BottomNavBar(
-   navController: NavController
+    context: Context
 ) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+    val currentActivity = LocalContext.current.javaClass.simpleName
 
     Box(
         modifier = Modifier
@@ -39,15 +41,20 @@ fun BottomNavBar(
         ) {
             // Home Button
             Button(
-                onClick =  { navController.navigate("home") },
+                onClick = {
+                    if (currentActivity != "HomeActivity") {
+                        val intent = Intent(context, HomeActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                },
                 modifier = Modifier
                     .clip(CircleShape)
                     .size(50.dp)
                     .align(Alignment.CenterVertically),
                 contentPadding = PaddingValues(0.dp),
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (currentRoute == "home") Color(0xFF539DF3) else Color.Black,
-                    containerColor = if (currentRoute == "home") Color(0xFFc0dbfb) else Color.White
+                    contentColor = if (currentActivity == "HomeActivity") Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (currentActivity == "HomeActivity") Color(0xFFc0dbfb) else Color.White
                 )
             ) {
                 Icon(
@@ -59,10 +66,15 @@ fun BottomNavBar(
 
             // Weather Button
             Button(
-                onClick =  { navController.navigate("weather") },
+                onClick = {
+                    if (currentActivity != "WeatherActivity") {
+                        val intent = Intent(context, WeatherActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (currentRoute == "weather") Color(0xFF539DF3) else Color.Black,
-                    containerColor = if (currentRoute == "weather") Color(0xFFc0dbfb) else Color.White
+                    contentColor = if (currentActivity == "WeatherActivity") Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (currentActivity == "WeatherActivity") Color(0xFFc0dbfb) else Color.White
                 ),
                 modifier = Modifier.size(50.dp),
                 contentPadding = PaddingValues(0.dp)
@@ -76,10 +88,15 @@ fun BottomNavBar(
 
             // Articles Button
             Button(
-                onClick = { navController.navigate("tips") },
+                onClick = {
+                    if (currentActivity != "WeatherTipsActivity") {
+                        val intent = Intent(context, WeatherTipsActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (currentRoute == "tips") Color(0xFF539DF3) else Color.Black,
-                    containerColor = if (currentRoute == "tips") Color(0xFFc0dbfb) else Color.White
+                    contentColor = if (currentActivity == "WeatherTipsActivity") Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (currentActivity == "WeatherTipsActivity") Color(0xFFc0dbfb) else Color.White
                 ),
                 modifier = Modifier.size(50.dp),
                 contentPadding = PaddingValues(0.dp)
