@@ -1,6 +1,7 @@
 package com.example.envirolink.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.mutableStateOf
@@ -14,7 +15,7 @@ class WeatherTipsActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.d("Lifecycle", "Create Activity, preparing UI and declaring variable")
         generateRandomWeatherCondition()
         setContent {
             WeatherTipsScreen(condition = weatherCondition.value,)
@@ -30,6 +31,7 @@ class WeatherTipsActivity : ComponentActivity() {
     override fun onPause() {
         super.onPause()
         stopWeatherUpdates()
+        Log.d("Lifecycle", "Pause Activity, stop updating weather condition")
     }
 
     private fun generateRandomWeatherCondition() {
@@ -38,6 +40,7 @@ class WeatherTipsActivity : ComponentActivity() {
     }
 
     private fun startWeatherUpdates() {
+        Log.d("Lifecycle", "Resume Activity, update weather condition every 5 seconds")
         weatherJob = CoroutineScope(Dispatchers.Main).launch {
             while (isActive) {
                 generateRandomWeatherCondition()
