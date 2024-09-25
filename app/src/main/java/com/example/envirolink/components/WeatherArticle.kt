@@ -13,7 +13,7 @@ import com.example.envirolink.ui.theme.InriaSansFamily
 
 @Composable
 fun ArticleItem(
-    context: Context, // Add context parameter
+    context: Context,
     title: String,
     publisher: String,
     date: String,
