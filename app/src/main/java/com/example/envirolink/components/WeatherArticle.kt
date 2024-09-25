@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.envirolink.activity.ArticleDetailActivity
 import com.example.envirolink.ui.theme.InriaSansFamily
+import java.util.*
 
 @Composable
 fun ArticleItem(
@@ -19,6 +20,9 @@ fun ArticleItem(
     date: String,
     articleId: String
 ) {
+    // Split the date string at 'T' to get only the date portion
+    val formattedDate = date.split("T")[0]
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -40,9 +44,10 @@ fun ArticleItem(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = publisher, fontFamily = InriaSansFamily)
-                Text(text = date, fontFamily = InriaSansFamily)
+                Text(text = formattedDate, fontFamily = InriaSansFamily)  // Display formatted date
             }
         }
     }
 }
+
 
