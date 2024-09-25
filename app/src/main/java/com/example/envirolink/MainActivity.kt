@@ -1,6 +1,7 @@
 package com.example.envirolink
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -26,6 +27,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.example.envirolink.ui.pages.ArticleDetailScreen
 import com.example.envirolink.ui.pages.HomeScreen
 import com.example.envirolink.ui.pages.WeatherDetailScreen
@@ -36,6 +39,7 @@ import com.example.envirolink.ui.theme.InterFamily
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("Lifecycle", "Creating Activity")
         setContent {
             val navController = rememberNavController()
 
@@ -45,10 +49,37 @@ class MainActivity : ComponentActivity() {
                 composable("tips") { WeatherTipsScreen(navController) }
                 composable("article/{articleId}") { backStackEntry ->
                     val articleId = backStackEntry.arguments?.getString("articleId")
-                    ArticleDetailScreen(articleId = articleId ?: "", navigateBack = {  navController.popBackStack()  })
+                    ArticleDetailScreen(
+                        articleId = articleId ?: "",
+                        navigateBack = { navController.popBackStack() })
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("Lifecycle", "Starting Activity")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("Lifecycle", "Pausing Activity")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("Lifecycle", "Stopping Activity")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("Lifecycle", "Destroying Activity")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("Lifecycle", "Resuming Activity")
     }
 }
 
@@ -127,7 +158,9 @@ fun PreviewWeatherDetailScreen() {
         composable("tips") { WeatherTipsScreen(navController) }
         composable("article/{articleId}") { backStackEntry ->
             val articleId = backStackEntry.arguments?.getString("articleId")
-            ArticleDetailScreen(articleId = articleId ?: "", navigateBack = { navController.popBackStack() })
+            ArticleDetailScreen(
+                articleId = articleId ?: "",
+                navigateBack = { navController.popBackStack() })
         }
     }
 }
