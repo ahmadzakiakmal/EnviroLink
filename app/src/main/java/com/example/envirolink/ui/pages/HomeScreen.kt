@@ -19,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -27,16 +28,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.envirolink.DayBox
 import com.example.envirolink.PlaceholderCircle
-import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
+import com.example.envirolink.ui.theme.InterFamily
 
 @Composable
-fun HomeScreen(navController: NavController = rememberNavController()) {
+fun HomeScreen(aqi: Int) {
     EnviroLinkTheme {
         // A surface container using the 'background' color from the theme
         Box(modifier = Modifier.fillMaxSize()) {
@@ -101,17 +100,27 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                             .background(Color(0xFFFFFFFF))
                     ) {
                         Box(
-                            Modifier
+                            modifier = Modifier
+                                .padding(0.dp)
                                 .clip(
                                     CircleShape
                                 )
                                 .background(Color(0xFFD9D9D9))
-                                .size(240.dp)
-                        )
+                                .size(240.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                Text(
+                                    "AQI",
+                                    fontSize = 18.sp,
+                                    fontFamily = InterFamily,
+                                    color = Color(0xFF333333)
+                                )
+                                Text(aqi.toString(), fontSize = 30.sp, fontFamily = InterFamily)
+                            }
+                        }
                     }
                 }
-
-                BottomNavBar(navController = navController)
             }
         }
     }
@@ -120,5 +129,5 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
 @Preview
 @Composable
 fun PreviewHomeScreen() {
-    HomeScreen()
+    HomeScreen(aqi = 193)
 }
