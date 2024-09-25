@@ -27,16 +27,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.envirolink.DayBox
 import com.example.envirolink.PlaceholderCircle
-import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
 
 @Composable
-fun HomeScreen(navController: NavController = rememberNavController()) {
+fun HomeScreen() {
     EnviroLinkTheme {
         // A surface container using the 'background' color from the theme
         Box(modifier = Modifier.fillMaxSize()) {
@@ -110,8 +107,6 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                         )
                     }
                 }
-
-                BottomNavBar(navController = navController)
             }
         }
     }
