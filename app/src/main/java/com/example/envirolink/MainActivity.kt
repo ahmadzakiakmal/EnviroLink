@@ -35,6 +35,7 @@ import com.example.envirolink.ui.pages.WeatherDetailScreen
 import com.example.envirolink.ui.pages.WeatherTipsScreen
 import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.ui.theme.InterFamily
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +44,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
+            val randomInteger = Random.nextInt(29, 39)
+
             NavHost(navController = navController, startDestination = "home") {
                 composable("home") { HomeScreen(navController) }
-                composable("weather") { WeatherDetailScreen(navController) }
+                composable("weather") {
+                    WeatherDetailScreen(
+                        navController,
+                        temperature = randomInteger
+                    )
+                }
                 composable("tips") { WeatherTipsScreen(navController) }
                 composable("article/{articleId}") { backStackEntry ->
                     val articleId = backStackEntry.arguments?.getString("articleId")

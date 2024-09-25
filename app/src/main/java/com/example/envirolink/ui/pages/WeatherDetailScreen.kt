@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import androidx.core.text.util.LocalePreferences
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.envirolink.components.BottomNavBar
@@ -44,7 +45,7 @@ import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.ui.theme.InterFamily
 
 @Composable
-fun WeatherDetailScreen(navController: NavController) {
+fun WeatherDetailScreen(navController: NavController, temperature: Int = 0) {
     EnviroLinkTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -60,7 +61,7 @@ fun WeatherDetailScreen(navController: NavController) {
                             .fillMaxWidth()
                             .padding(16.dp)
                     ) {
-                        CurrentWeather()
+                        CurrentWeather(temperature)
                     }
                 }
 
@@ -89,7 +90,7 @@ fun WeatherDetailScreen(navController: NavController) {
 }
 
 @Composable
-fun CurrentWeather() {
+fun CurrentWeather(temperature: Int) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -110,7 +111,7 @@ fun CurrentWeather() {
                         .align(
                             Alignment.TopEnd
                         ),
-                    text = "27°",
+                    text = temperature.toString() + "°",
                     fontFamily = InterFamily,
                     fontWeight = FontWeight.Bold,
                     fontSize = 10.em
@@ -225,7 +226,8 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
             Modifier
                 .clip(CircleShape)
                 .background(Color(0xFFD9D9D9))
-                .size(40.dp))
+                .size(40.dp)
+        )
         Spacer(modifier = Modifier.height(14.dp))
         Text(
             text = temp,
@@ -235,7 +237,11 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
             fontFamily = InterFamily,
         )
         Spacer(modifier = Modifier.height(14.dp))
-        Text(text = value, fontSize = 14.sp, color = if (isSelected) Color.White else Color.DarkGray)
+        Text(
+            text = value,
+            fontSize = 14.sp,
+            color = if (isSelected) Color.White else Color.DarkGray
+        )
     }
 }
 
