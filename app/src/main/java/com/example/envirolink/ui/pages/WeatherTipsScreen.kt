@@ -11,27 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-<<<<<<< HEAD
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.envirolink.components.BottomNavBar
-=======
 import com.example.envirolink.components.ArticleItem
->>>>>>> 6e51a6a09de3bab233eaf80dd0552288df19a0d4
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.viewmodel.ArticleViewModel
 
 @Composable
-<<<<<<< HEAD
-fun WeatherTipsScreen(navController: NavController, viewModel: ArticleViewModel = viewModel()) {
+fun WeatherTipsScreen(condition: String, viewModel: ArticleViewModel = viewModel()) {
     val articles = viewModel.articles.collectAsState()
-=======
-fun WeatherTipsScreen(condition: String) {
     val context = LocalContext.current
 
->>>>>>> 6e51a6a09de3bab233eaf80dd0552288df19a0d4
     EnviroLinkTheme {
         Box(
             modifier = Modifier
@@ -74,13 +65,12 @@ fun WeatherTipsScreen(condition: String) {
                     Spacer(modifier = Modifier.height(16.dp))
                 }
 
-<<<<<<< HEAD
                 // Dynamic list of articles
                 items(articles.value.size) { index ->
                     val article = articles.value[index]
                     ArticleItem(
+                        context,
                         articleId = index.toString(),
-                        navController = navController,
                         title = article.title,
                         publisher = article.source.name,
                         date = article.publishedAt
@@ -88,23 +78,6 @@ fun WeatherTipsScreen(condition: String) {
                 }
             }
 
-
-            BottomNavBar(navController)
-=======
-                        // Add the list of articles
-                        ArticleItem(context = context, articleId= "2024001", title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
-                    }
-                }
-            }
->>>>>>> 6e51a6a09de3bab233eaf80dd0552288df19a0d4
         }
     }
 }
