@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -16,7 +15,7 @@ import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
 
 @Composable
-fun WeatherTipsScreen(condition: MutableState<String>) {
+fun WeatherTipsScreen(condition: String) {
     val context = LocalContext.current
 
     EnviroLinkTheme {
@@ -45,7 +44,7 @@ fun WeatherTipsScreen(condition: MutableState<String>) {
                             Text(text = "Today's Tips 💡", fontFamily = InriaSansFamily)
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
-                                text = getWeatherTip(condition.value),
+                                text = getWeatherTip(condition),
                                 fontFamily = InriaSansFamily
                             )
                         }
