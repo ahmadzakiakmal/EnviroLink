@@ -6,16 +6,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.components.ArticleItem
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
+import com.example.envirolink.viewmodel.ArticleViewModel
 
 @Composable
-fun WeatherTipsScreen(condition: String) {
+fun WeatherTipsScreen(navController: NavController, viewModel: ArticleViewModel = viewModel()) {
+    val articles = viewModel.articles.collectAsState()
     val context = LocalContext.current
 
     EnviroLinkTheme {
@@ -29,12 +36,15 @@ fun WeatherTipsScreen(condition: String) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(bottom = 64.dp)
+                    .padding(16.dp)
             ) {
+                // Static content, e.g., "Today's Tips"
                 item {
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp),
+                            .padding(bottom = 16.dp)
+
                     ) {
                         Column(
                             modifier = Modifier
@@ -51,28 +61,27 @@ fun WeatherTipsScreen(condition: String) {
                     }
                 }
 
-                item {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp)
-                    ) {
-                        Text(text = "Daily Articles", fontFamily = InriaSansFamily)
-                        Spacer(modifier = Modifier.height(8.dp))
+                item(
+                ) {
+                    Text(text = "Daily Articles", fontFamily = InriaSansFamily)
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
 
-                        // Add the list of articles
-                        ArticleItem(context = context, articleId= "2024001", title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Understanding Air Quality Index", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "How Weather Affects Your Mood", publisher = "Publisher", date = "Date")
-                        ArticleItem(context = context, articleId= "2024001", title = "Tips for Staying Healthy in Polluted Areas", publisher = "Publisher", date = "Date")
-                    }
+                // Dynamic list of articles
+                items(articles.value.size) { index ->
+                    val article = articles.value[index]
+                    ArticleItem(
+                        articleId = index.toString(),
+                        navController = navController,
+                        title = article.title,
+                        publisher = article.source.name,
+                        date = article.publishedAt
+                    )
                 }
             }
+
+
+            BottomNavBar(navController)
         }
     }
 }
