@@ -37,9 +37,10 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InterFamily
+import kotlin.random.Random
 
 @Composable
-fun WeatherDetailScreen(temperature: Int = 0) {
+fun WeatherDetailScreen(temperature: Int) {
     EnviroLinkTheme {
         Box(
             modifier = Modifier.fillMaxSize()
