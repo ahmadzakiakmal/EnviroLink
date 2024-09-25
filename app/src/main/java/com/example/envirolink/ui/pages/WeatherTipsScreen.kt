@@ -12,8 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.components.ArticleItem
 import com.example.envirolink.ui.theme.EnviroLinkTheme
@@ -21,7 +19,7 @@ import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.viewmodel.ArticleViewModel
 
 @Composable
-fun WeatherTipsScreen(navController: NavController, viewModel: ArticleViewModel = viewModel()) {
+fun WeatherTipsScreen(condition: String, viewModel: ArticleViewModel = viewModel()) {
     val articles = viewModel.articles.collectAsState()
     val context = LocalContext.current
 
@@ -71,8 +69,8 @@ fun WeatherTipsScreen(navController: NavController, viewModel: ArticleViewModel 
                 items(articles.value.size) { index ->
                     val article = articles.value[index]
                     ArticleItem(
+                        context,
                         articleId = index.toString(),
-                        navController = navController,
                         title = article.title,
                         publisher = article.source.name,
                         date = article.publishedAt
@@ -80,8 +78,6 @@ fun WeatherTipsScreen(navController: NavController, viewModel: ArticleViewModel 
                 }
             }
 
-
-            BottomNavBar(navController)
         }
     }
 }
