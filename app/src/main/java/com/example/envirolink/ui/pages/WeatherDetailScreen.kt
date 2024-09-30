@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.InvertColors
 import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.WbSunny
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -32,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
@@ -50,6 +52,14 @@ fun WeatherDetailScreen(temperature: Int) {
                     .fillMaxSize()
                     .padding(bottom = 64.dp)
             ) {
+                item {
+                    Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                        Button(onClick = { /*TODO*/ }) {
+                            Text("Appearance")
+                        }
+                    }
+                }
+
                 item {
                     Card(
                         modifier = Modifier
@@ -104,7 +114,7 @@ fun CurrentWeather(temperature: Int) {
                         .align(
                             Alignment.TopEnd
                         ),
-                    text = temperature.toString() + "°",
+                    text = "$temperature°",
                     fontFamily = InterFamily,
                     fontWeight = FontWeight.Bold,
                     fontSize = 10.em
@@ -238,8 +248,8 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewWeatherDetailScreen() {
-//    WeatherDetailScreen(navController = rememberNavController())
-//}
+@Preview(showBackground = true)
+@Composable
+fun PreviewWeatherDetailScreen() {
+    WeatherDetailScreen(temperature = 20)
+}
