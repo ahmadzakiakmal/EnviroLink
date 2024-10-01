@@ -27,6 +27,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,6 +47,9 @@ import kotlin.random.Random
 
 @Composable
 fun WeatherDetailScreen(temperature: Int) {
+    var darkMode by remember {
+        mutableStateOf(false)
+    }
     EnviroLinkTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -53,9 +60,14 @@ fun WeatherDetailScreen(temperature: Int) {
                     .padding(bottom = 64.dp)
             ) {
                 item {
-                    Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                        Button(onClick = { /*TODO*/ }) {
-                            Text("Appearance")
+                    Row(
+                        Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Button(onClick = { darkMode = !darkMode }) {
+                            Text(text = if (darkMode) "Dark" else "Light")
                         }
                     }
                 }
