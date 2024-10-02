@@ -52,7 +52,7 @@ fun WeatherDetailScreen(temperature: Int) {
     }
     EnviroLinkTheme {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().background(Color(if (darkMode) 0xFF16181b else 0xFFFFFFFF))
         ) {
             LazyColumn(
                 modifier = Modifier
