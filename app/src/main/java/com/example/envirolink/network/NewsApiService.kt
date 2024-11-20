@@ -11,5 +11,6 @@ interface NewsApiService {
         @Query("language") language: String,
         @Query("from") from: String,
         @Query("sortBy") sortBy: String,
+        @Query("pageSize") pageSize: Int,
     ): ArticleResponse
 }

@@ -18,7 +18,7 @@ class WeatherTipsActivity : ComponentActivity() {
         Log.d("Lifecycle", "Create Activity, preparing UI and declaring variable")
         generateRandomWeatherCondition()
         setContent {
-            WeatherTipsScreen(condition = weatherCondition.value,)
+            WeatherTipsScreen(condition = weatherCondition.value)
             BottomNavBar(context = this)
         }
     }

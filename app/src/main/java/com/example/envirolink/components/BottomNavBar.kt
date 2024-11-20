@@ -2,6 +2,7 @@ package com.example.envirolink.components
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -20,12 +21,14 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.envirolink.activity.HomeActivity
 import com.example.envirolink.activity.WeatherActivity
 import com.example.envirolink.activity.WeatherTipsActivity
+import com.example.envirolink.utils.Pages
 
 @Composable
 fun BottomNavBar(
     context: Context
 ) {
     val currentActivity = LocalContext.current.javaClass.simpleName
+    val isInHomePage = currentActivity == Pages.HOME.activityName || currentActivity == Pages.MAIN.activityName
 
     Box(
         modifier = Modifier
@@ -42,7 +45,7 @@ fun BottomNavBar(
             // Home Button
             Button(
                 onClick = {
-                    if (currentActivity != "HomeActivity") {
+                    if (currentActivity != Pages.HOME.activityName) {
                         val intent = Intent(context, HomeActivity::class.java)
                         context.startActivity(intent)
                     }
@@ -53,8 +56,8 @@ fun BottomNavBar(
                     .align(Alignment.CenterVertically),
                 contentPadding = PaddingValues(0.dp),
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (currentActivity == "HomeActivity") Color(0xFF539DF3) else Color.Black,
-                    containerColor = if (currentActivity == "HomeActivity") Color(0xFFc0dbfb) else Color.White
+                    contentColor = if (isInHomePage) Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (isInHomePage) Color(0xFFc0dbfb) else Color.White
                 )
             ) {
                 Icon(
@@ -67,14 +70,14 @@ fun BottomNavBar(
             // Weather Button
             Button(
                 onClick = {
-                    if (currentActivity != "WeatherActivity") {
+                    if (currentActivity != Pages.WEATHER.activityName) {
                         val intent = Intent(context, WeatherActivity::class.java)
                         context.startActivity(intent)
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (currentActivity == "WeatherActivity") Color(0xFF539DF3) else Color.Black,
-                    containerColor = if (currentActivity == "WeatherActivity") Color(0xFFc0dbfb) else Color.White
+                    contentColor = if (currentActivity == Pages.WEATHER.activityName) Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (currentActivity == Pages.WEATHER.activityName) Color(0xFFc0dbfb) else Color.White
                 ),
                 modifier = Modifier.size(50.dp),
                 contentPadding = PaddingValues(0.dp)
@@ -89,14 +92,14 @@ fun BottomNavBar(
             // Articles Button
             Button(
                 onClick = {
-                    if (currentActivity != "WeatherTipsActivity") {
+                    if (currentActivity != Pages.WEATHERTIPS.activityName) {
                         val intent = Intent(context, WeatherTipsActivity::class.java)
                         context.startActivity(intent)
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (currentActivity == "WeatherTipsActivity") Color(0xFF539DF3) else Color.Black,
-                    containerColor = if (currentActivity == "WeatherTipsActivity") Color(0xFFc0dbfb) else Color.White
+                    contentColor = if (currentActivity == Pages.WEATHERTIPS.activityName) Color(0xFF539DF3) else Color.Black,
+                    containerColor = if (currentActivity == Pages.WEATHERTIPS.activityName) Color(0xFFc0dbfb) else Color.White
                 ),
                 modifier = Modifier.size(50.dp),
                 contentPadding = PaddingValues(0.dp)

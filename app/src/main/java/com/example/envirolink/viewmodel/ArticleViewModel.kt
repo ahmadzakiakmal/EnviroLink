@@ -23,8 +23,9 @@ class ArticleViewModel : ViewModel() {
                 val response = RetrofitInstance.api.getWeatherNews(
                     query = "weather",
                     language= "en",
-                    from = "2024-08-25",
+                    from = "2024-10-27",
                     sortBy = "publishedAt",
+                    pageSize = 15,
                 )
                 _articles.value = response.articles
             } catch (e: Exception) {

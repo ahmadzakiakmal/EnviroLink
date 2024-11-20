@@ -35,7 +35,6 @@ fun WeatherTipsScreen(condition: String, viewModel: ArticleViewModel = viewModel
                     .padding(bottom = 64.dp)
                     .padding(16.dp)
             ) {
-                // Static content, e.g., "Today's Tips"
                 item {
                     Card(
                         modifier = Modifier
