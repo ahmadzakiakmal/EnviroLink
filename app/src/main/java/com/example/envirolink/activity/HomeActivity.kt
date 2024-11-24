@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.envirolink.components.BottomNavBar
 import com.example.envirolink.ui.pages.HomeScreen
-import com.example.envirolink.ui.pages.WeatherDetailScreen
 import kotlin.random.Random
 
 class HomeActivity : ComponentActivity() {
