@@ -31,6 +31,8 @@
         <activity android:name=".activity.WeatherTipsActivity" />
         <activity android:name=".activity.ArticleDetailActivity" />
         <activity android:name=".activity.DeviceActivity" />
+        <activity android:name=".activity.MonitoringActivity" />
+
     </application>
 
 
