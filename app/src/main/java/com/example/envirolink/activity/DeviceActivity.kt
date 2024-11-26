@@ -46,6 +46,13 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 
+val dummyDevices = listOf(
+    "Sensor Ruang Tamu",
+    "Thermometer Kamar Anak",
+    "Hygrometer Gudang",
+    "Sensor Kelembapan Taman"
+)
+
 class DeviceActivity : ComponentActivity() {
     private var previewView: PreviewView? = null
     private var isCameraInitialized = false
@@ -68,6 +75,9 @@ class DeviceActivity : ComponentActivity() {
             var showCamera by remember { mutableStateOf(false) }
             var isLoading by remember { mutableStateOf(false) }
             var scannedQrCode by remember { mutableStateOf<String?>(null) }
+            var showModal by remember { mutableStateOf(false) }
+            var deviceId by remember { mutableStateOf("") }
+            var deviceName by remember { mutableStateOf("") }
             val context = this
 
             Box(modifier = Modifier.fillMaxSize()) {
@@ -76,15 +86,19 @@ class DeviceActivity : ComponentActivity() {
                     devices = devices,
                     onLoginClick = { },
                     onDeviceAdded = { deviceId, deviceName ->
-                        devices.add("$deviceName (ID: $deviceId)")
+                        //
                     },
-                    onOpenCamera = {
+                    scanQrCode = {
                         // Check and request camera permission
                         when {
                             ContextCompat.checkSelfPermission(
                                 context,
                                 Manifest.permission.CAMERA
                             ) == PackageManager.PERMISSION_GRANTED -> {
+                                // Close the current modal
+                                showModal = false
+
+                                // Show camera
                                 showCamera = true
                                 startCamera { qrCodeText ->
                                     // Callback when QR code is scanned
@@ -95,15 +109,33 @@ class DeviceActivity : ComponentActivity() {
                                     // Simulate processing or network call
                                     Handler(Looper.getMainLooper()).postDelayed({
                                         isLoading = false
-                                        // Additional logic after scanning
-                                        Toast.makeText(context, scannedQrCode, Toast.LENGTH_SHORT).show()
-                                    }, 2000) // 2 seconds loading
-
+                                        // Reopen the modal and autofill device ID
+                                        deviceId = qrCodeText
+                                        showModal = true
+                                        Toast.makeText(context, "QR Code Scanned", Toast.LENGTH_SHORT).show()
+                                    }, 1000) // 1 second loading
                                 }
                             }
                             else -> {
                                 requestPermissionLauncher.launch(Manifest.permission.CAMERA)
                             }
+                        }
+                    },
+                    showModal = showModal,
+                    onShowModalChange = { showModal = it },
+                    deviceId = deviceId,
+                    onDeviceIdChange = { deviceId = it },
+                    deviceName = deviceName,
+                    onDeviceNameChange = { deviceName = it },
+                    onConfirmDevice = {
+                        if (deviceId.isNotBlank() && deviceName.isNotBlank()) {
+                            // devices.add("$deviceName (ID: $deviceId)")
+                            deviceId = ""
+                            deviceName = ""
+                            showModal = false
+                            Toast.makeText(context, "Perangkat berhasil ditambahkan!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(context, "Isi semua kolom terlebih dahulu", Toast.LENGTH_SHORT).show()
                         }
                     }
                 )
