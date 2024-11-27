@@ -32,6 +32,7 @@ import kotlin.random.Random
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val aqi = Random.nextInt(78, 198)
         setContent {
             HomeScreen(aqi)

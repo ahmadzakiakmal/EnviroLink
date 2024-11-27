@@ -27,7 +27,7 @@ import kotlin.random.Random
 fun MonitoringScreen(
     onBack: () -> Unit = {},
     deviceName: String,
-//    deviceId: String
+    deviceId: String
 ) {
     // Initial values for temperature and humidity
     var temperature by remember { mutableDoubleStateOf(Random.nextDouble(20.0, 30.0)) }

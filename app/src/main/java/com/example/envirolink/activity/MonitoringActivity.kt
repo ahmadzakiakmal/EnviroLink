@@ -9,13 +9,13 @@ class MonitoringActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val deviceName = intent.getStringExtra("DEVICE_NAME") ?: "Unknown Device"
-        val deviceId = intent.getStringExtra("DEVICE_ID") ?: "Unknown ID"
+        val deviceName = intent.getStringExtra("deviceName") ?: "Unknown Device"
+        val deviceId = intent.getStringExtra("deviceId") ?: "Unknown ID"
 
         setContent {
             MonitoringScreen(
                 deviceName = deviceName,
-//                deviceId = deviceId,
+                deviceId = deviceId,
                 onBack = { finish() }
             )
         }
