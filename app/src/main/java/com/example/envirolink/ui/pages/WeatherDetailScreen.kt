@@ -46,7 +46,7 @@ import com.example.envirolink.ui.theme.InterFamily
 import kotlin.random.Random
 
 @Composable
-fun WeatherDetailScreen(temperature: Int) {
+fun WeatherDetailScreen(temperature: Double, cloud: Int, wind_kph: Double, humidity: Int, uv: Double, heatIndex: Double, visibilityKm: Double, aqi: Int) {
     var darkMode by remember {
         mutableStateOf(false)
     }
@@ -88,7 +88,7 @@ fun WeatherDetailScreen(temperature: Int) {
                             .fillMaxWidth()
                             .padding(16.dp)
                     ) {
-                        WeatherDetails()
+                        WeatherDetails(cloud, wind_kph, humidity, uv, heatIndex, visibilityKm)
                     }
                 }
 
@@ -96,7 +96,7 @@ fun WeatherDetailScreen(temperature: Int) {
                     Column(
                         modifier = Modifier.padding(16.dp)
                     ) {
-                        Forecast()
+                        Forecast(temperature, aqiToday = aqi)
                     }
                 }
             }
@@ -105,7 +105,7 @@ fun WeatherDetailScreen(temperature: Int) {
 }
 
 @Composable
-fun CurrentWeather(temperature: Int) {
+fun CurrentWeather(temperature: Double) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -133,13 +133,13 @@ fun CurrentWeather(temperature: Int) {
                 )
             }
             Text(
-                text = "LOREM",
+                text = "John Doe",
                 fontFamily = InterFamily,
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp
             )
             Text(
-                text = "Senin, 09/24",
+                text = "Jumat, 11/29",
                 fontFamily = InterFamily,
                 fontSize = 16.sp
             )
@@ -148,7 +148,7 @@ fun CurrentWeather(temperature: Int) {
 }
 
 @Composable
-fun WeatherDetails() {
+fun WeatherDetails(cloud: Int, wind_kph: Double, humidity: Int, uv: Double, heatIndex: Double, visibilityKm: Double) {
     Column(
         modifier = Modifier
             .background(Color(0xFFF4F4F4))
@@ -159,24 +159,24 @@ fun WeatherDetails() {
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            WeatherDetailItem(icon = Icons.Default.Air, "29", unit = "km/h")
-            WeatherDetailItem(icon = Icons.Default.InvertColors, "0.9", unit = "%")
-            WeatherDetailItem(icon = Icons.Default.CloudQueue, "30", unit = "%")
+            WeatherDetailItem(indicatorFor = "Wind Speed",icon = Icons.Default.Air, "$wind_kph", unit = "km/h")
+            WeatherDetailItem(indicatorFor = "Humidity", icon = Icons.Default.InvertColors, "$humidity", unit = "%")
+            WeatherDetailItem(indicatorFor = "Cloud Coverage", icon = Icons.Default.CloudQueue, "$cloud", unit = "%")
         }
         Spacer(modifier = Modifier.height(25.dp))
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            WeatherDetailItem(icon = Icons.Default.WbSunny, "3", "")
-            WeatherDetailItem(icon = Icons.Default.Thermostat, "26.5°", "")
-            WeatherDetailItem(icon = Icons.Default.Visibility, "50", "")
+            WeatherDetailItem(indicatorFor = "UV Index", icon = Icons.Default.WbSunny, "$uv", "")
+            WeatherDetailItem(indicatorFor = "Heat Index", icon = Icons.Default.Thermostat, "$heatIndex°", "")
+            WeatherDetailItem(indicatorFor = "Visibility", icon = Icons.Default.Visibility, "$visibilityKm", "km")
         }
     }
 }
 
 @Composable
-fun WeatherDetailItem(icon: ImageVector, value: String, unit: String) {
+fun WeatherDetailItem(indicatorFor: String, icon: ImageVector, value: String, unit: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.width(60.dp)
@@ -187,7 +187,7 @@ fun WeatherDetailItem(icon: ImageVector, value: String, unit: String) {
             modifier = Modifier.size(24.dp),
             tint = Color(0xFF6C757E)
         )
-        Text("Lorem", color = Color(0xFFCDD2DE))
+        Text(indicatorFor, color = Color(0xFFCDD2DE))
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = value,
@@ -206,15 +206,15 @@ fun WeatherDetailItem(icon: ImageVector, value: String, unit: String) {
 }
 
 @Composable
-fun Forecast() {
+fun Forecast(tempToday: Double, aqiToday: Int) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        ForecastItem("10/07", "22°C", "193")
-        ForecastItem("10/08", "22°C", "193", isSelected = true)
-        ForecastItem("10/09", "27°C", "150")
-        ForecastItem("10/10", "28°C", "78")
+        ForecastItem("11/28", "26.4°C", "193")
+        ForecastItem("11/29", "$tempToday°C", "$aqiToday", isSelected = true)
+        ForecastItem("11/30", "27.1°C", "150")
+        ForecastItem("12/01", "26.7°C", "78")
     }
 }
 
@@ -260,8 +260,8 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewWeatherDetailScreen() {
-    WeatherDetailScreen(temperature = 20)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewWeatherDetailScreen() {
+//    WeatherDetailScreen(temperature = 20)
+//}
