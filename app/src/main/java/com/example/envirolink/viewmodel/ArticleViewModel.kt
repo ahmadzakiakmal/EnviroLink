@@ -1,5 +1,6 @@
 package com.example.envirolink.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.envirolink.model.Article
@@ -23,10 +24,11 @@ class ArticleViewModel : ViewModel() {
                 val response = RetrofitInstance.api.getWeatherNews(
                     query = "weather",
                     language= "en",
-                    from = "2024-10-27",
+                    from = "2024-11-25",
                     sortBy = "publishedAt",
                     pageSize = 15,
                 )
+//                Log.d("getarticle", "${response.status}")
                 _articles.value = response.articles
             } catch (e: Exception) {
                 // Handle errors
