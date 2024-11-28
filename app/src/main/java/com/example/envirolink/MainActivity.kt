@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,31 +24,49 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import com.example.envirolink.ui.pages.HomeScreen
 import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.ui.theme.InterFamily
 import com.example.envirolink.components.BottomNavBar
+import com.example.envirolink.model.Current
+import com.example.envirolink.model.Forecast
+import com.example.envirolink.viewmodel.ForecastViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
+    private val forecastViewModel: ForecastViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val aqi = Random.nextInt(78, 198)
-        setContent {
-            HomeScreen(aqi)
-            BottomNavBar(context = this)
+        forecastViewModel.fetchForecastData()
+        lifecycleScope.launch {
+            forecastViewModel.forecastData.collectLatest { weather ->
+                weather?.let {
+                    setContent {
+                        HomeScreen(current = it.current, forecast = it.forecast)
+                        BottomNavBar(context = this@MainActivity)
+                    }
+                }
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        val aqi = Random.nextInt(78, 198)
-        Log.d("Lifecycle", "Resume Activity, new AQI value: $aqi")
-        setContent {
-            HomeScreen(aqi)
-            BottomNavBar(context = this)
+        forecastViewModel.fetchForecastData()
+        lifecycleScope.launch {
+            forecastViewModel.forecastData.collectLatest { weather ->
+                weather?.let {
+                    setContent {
+                        HomeScreen(current = it.current, forecast = it.forecast)
+                        BottomNavBar(context = this@MainActivity)
+                    }
+                }
+            }
         }
     }
 }
@@ -65,7 +84,7 @@ fun PlaceholderCircle() {
 }
 
 @Composable
-fun DayBox(today: Boolean) {
+fun DayBox(temperature: Double, aqi: String, day: String, date: String, today: Boolean) {
     Column(
         modifier = Modifier
             .background(if (!today) Color.White else Color(0xFFA8A8A8))
@@ -74,13 +93,13 @@ fun DayBox(today: Boolean) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            "DAY",
+            day,
             fontFamily = InriaSansFamily,
             fontSize = 14.sp,
             color = if (!today) Color.Black else Color.White
         )
         Text(
-            "14/09",
+            date,
             fontSize = 12.sp,
             fontFamily = InriaSansFamily,
             color = if (!today) Color(0xFFA0A7BA) else Color.Black
@@ -93,7 +112,7 @@ fun DayBox(today: Boolean) {
                 .background(Color(0xFFD9D9D9))
         )
         Text(
-            "22° C",
+            "$temperature°C",
             fontSize = 19.sp,
             fontFamily = InterFamily,
             fontWeight = FontWeight.Bold,
@@ -106,7 +125,7 @@ fun DayBox(today: Boolean) {
                 .background(Color(0xFF8E8D88))
         ) {
             Text(
-                "192",
+                aqi,
                 color = Color.White,
                 fontFamily = InterFamily,
                 modifier = Modifier

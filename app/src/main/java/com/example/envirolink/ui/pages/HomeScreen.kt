@@ -30,12 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.envirolink.DayBox
 import com.example.envirolink.PlaceholderCircle
+import com.example.envirolink.model.Current
+import com.example.envirolink.model.Forecast
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InriaSansFamily
 import com.example.envirolink.ui.theme.InterFamily
 
 @Composable
-fun HomeScreen(aqi: Int) {
+fun HomeScreen(current: Current, forecast: Forecast) {
     EnviroLinkTheme {
         // A surface container using the 'background' color from the theme
         Box(modifier = Modifier.fillMaxSize()) {
@@ -85,13 +87,13 @@ fun HomeScreen(aqi: Int) {
                             .fillMaxWidth()
                             .padding(bottom = 44.dp)
                     ) {
-                        DayBox(today = false)
+                        DayBox(temperature = 26.4, day = "Kamis", aqi = "193", date = "11/28", today = false)
                         Spacer(Modifier.width(30.dp))
-                        DayBox(today = true)
+                        DayBox(temperature = current.temp_c, day = "Jumat", aqi = current.air_quality.o3.toInt().toString(), date = "11/29", today = true)
                         Spacer(Modifier.width(30.dp))
-                        DayBox(today = false)
+                        DayBox(temperature = forecast.forecastday[1].day.avgtemp_c, day = "Sabtu", aqi = "", date = "11/30", today = false)
                         Spacer(Modifier.width(30.dp))
-                        DayBox(today = false)
+                        DayBox(temperature = forecast.forecastday[2].day.avgtemp_c, day = "Minggu", aqi = "", date = "12/01", today = false)
                     }
                     Row(
                         horizontalArrangement = Arrangement.Center,
@@ -116,7 +118,7 @@ fun HomeScreen(aqi: Int) {
                                     fontFamily = InterFamily,
                                     color = Color(0xFF333333)
                                 )
-                                Text(aqi.toString(), fontSize = 30.sp, fontFamily = InterFamily)
+                                Text(current.air_quality.o3.toInt().toString(), fontSize = 30.sp, fontFamily = InterFamily)
                             }
                         }
                     }
@@ -126,8 +128,8 @@ fun HomeScreen(aqi: Int) {
     }
 }
 
-@Preview
-@Composable
-fun PreviewHomeScreen() {
-    HomeScreen(aqi = 193)
-}
+//@Preview
+//@Composable
+//fun PreviewHomeScreen() {
+//    HomeScreen(aqi = 193)
+//}

@@ -41,12 +41,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import com.example.envirolink.model.Forecast
 import com.example.envirolink.ui.theme.EnviroLinkTheme
 import com.example.envirolink.ui.theme.InterFamily
 import kotlin.random.Random
 
 @Composable
-fun WeatherDetailScreen(temperature: Double, cloud: Int, wind_kph: Double, humidity: Int, uv: Double, heatIndex: Double, visibilityKm: Double, aqi: Int) {
+fun WeatherDetailScreen(temperature: Double, cloud: Int, wind_kph: Double, humidity: Int, uv: Double, heatIndex: Double, visibilityKm: Double, aqi: Int, forecast: Forecast) {
     var darkMode by remember {
         mutableStateOf(false)
     }
@@ -96,7 +97,7 @@ fun WeatherDetailScreen(temperature: Double, cloud: Int, wind_kph: Double, humid
                     Column(
                         modifier = Modifier.padding(16.dp)
                     ) {
-                        Forecast(temperature, aqiToday = aqi)
+                        Forecast(temperature, forecast, aqiToday = aqi)
                     }
                 }
             }
@@ -187,7 +188,7 @@ fun WeatherDetailItem(indicatorFor: String, icon: ImageVector, value: String, un
             modifier = Modifier.size(24.dp),
             tint = Color(0xFF6C757E)
         )
-        Text(indicatorFor, color = Color(0xFFCDD2DE))
+        Text(indicatorFor, color = Color(0xFFCDD2DE), fontSize = 14.sp)
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = value,
@@ -206,20 +207,20 @@ fun WeatherDetailItem(indicatorFor: String, icon: ImageVector, value: String, un
 }
 
 @Composable
-fun Forecast(tempToday: Double, aqiToday: Int) {
+fun Forecast(tempToday: Double, forecast: Forecast, aqiToday: Int) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        ForecastItem("11/28", "26.4°C", "193")
-        ForecastItem("11/29", "$tempToday°C", "$aqiToday", isSelected = true)
-        ForecastItem("11/30", "27.1°C", "150")
-        ForecastItem("12/01", "26.7°C", "78")
+        ForecastItem("Kamis","11/28", "26.4°C", "193")
+        ForecastItem("Jumat","11/29", "$tempToday°C", "$aqiToday", isSelected = true)
+        ForecastItem("Sabtu","11/30", "${forecast.forecastday[1].day.avgtemp_c}°C", "")
+        ForecastItem("Minggu","12/01", "${forecast.forecastday[2].day.avgtemp_c}°C", "")
     }
 }
 
 @Composable
-fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean = false) {
+fun ForecastItem(day: String, date: String, temp: String, value: String, isSelected: Boolean = false) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -230,7 +231,7 @@ fun ForecastItem(date: String, temp: String, value: String, isSelected: Boolean 
             .width(63.dp)
     ) {
         Text(
-            "Lorem",
+            day,
             fontSize = 14.sp,
             fontFamily = InterFamily,
             modifier = Modifier.padding(bottom = 3.dp)
