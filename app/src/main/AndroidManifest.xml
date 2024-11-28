@@ -32,6 +32,7 @@
         <activity android:name=".activity.ArticleDetailActivity" />
         <activity android:name=".activity.DeviceActivity" />
         <activity android:name=".activity.MonitoringActivity" />
+        <activity android:name=".activity.WebViewActivity" />
 
     </application>
 

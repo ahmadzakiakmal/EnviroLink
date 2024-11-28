@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.envirolink.activity.ArticleDetailActivity
+import com.example.envirolink.activity.WebViewActivity
 import com.example.envirolink.ui.theme.InriaSansFamily
 import java.util.*
 
@@ -18,7 +19,8 @@ fun ArticleItem(
     title: String,
     publisher: String,
     date: String,
-    articleId: String
+    articleId: String,
+    articleUrl: String
 ) {
     // Split the date string at 'T' to get only the date portion
     val formattedDate = date.split("T")[0]
@@ -28,7 +30,8 @@ fun ArticleItem(
             .fillMaxWidth()
             .padding(vertical = 4.dp)
             .clickable {
-                val intent = Intent(context, ArticleDetailActivity::class.java).apply {
+                val intent = Intent(context, WebViewActivity::class.java).apply {
+                    putExtra("ARTICLE_URL", articleUrl)
                     putExtra("ARTICLE_TITLE", title)
                 }
                 context.startActivity(intent)

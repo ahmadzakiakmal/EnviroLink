@@ -78,6 +78,7 @@ fun WeatherTipsScreen(condition: String, viewModel: ArticleViewModel = viewModel
                         ArticleItem(
                             context,
                             articleId = index.toString(),
+                            articleUrl = article.url,
                             title = article.title,
                             publisher = article.source.name,
                             date = article.publishedAt
