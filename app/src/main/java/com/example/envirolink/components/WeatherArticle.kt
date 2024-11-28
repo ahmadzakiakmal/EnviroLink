@@ -29,7 +29,7 @@ fun ArticleItem(
             .padding(vertical = 4.dp)
             .clickable {
                 val intent = Intent(context, ArticleDetailActivity::class.java).apply {
-                    putExtra("ARTICLE_ID", articleId)
+                    putExtra("ARTICLE_TITLE", title)
                 }
                 context.startActivity(intent)
             }

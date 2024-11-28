@@ -13,4 +13,13 @@ interface NewsApiService {
         @Query("sortBy") sortBy: String,
         @Query("pageSize") pageSize: Int,
     ): ArticleResponse
+
+    @GET("everything")
+    suspend fun getNewsDetail(
+        @Query("q") query: String,
+        @Query("language") language: String,
+        @Query("searchIn") searchIn: String = "title",
+        @Query("sortBy") sortBy: String,
+        @Query("pageSize") pageSize: Int = 1
+    ): ArticleResponse
 }

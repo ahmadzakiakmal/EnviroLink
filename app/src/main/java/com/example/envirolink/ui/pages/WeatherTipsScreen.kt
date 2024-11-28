@@ -1,5 +1,6 @@
 package com.example.envirolink.ui.pages
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.runtime.Composable
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -20,6 +22,7 @@ import com.example.envirolink.viewmodel.ArticleViewModel
 @Composable
 fun WeatherTipsScreen(condition: String, viewModel: ArticleViewModel = viewModel()) {
     val articles = viewModel.articles.collectAsState()
+    val isLoading = viewModel.loading.collectAsState()
     val context = LocalContext.current
 
     EnviroLinkTheme {
@@ -28,54 +31,60 @@ fun WeatherTipsScreen(condition: String, viewModel: ArticleViewModel = viewModel
                 .fillMaxSize()
                 .background(Color.White)
         ) {
-
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 64.dp)
-                    .padding(16.dp)
-            ) {
-                item {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 16.dp)
-
-                    ) {
-                        Column(
+            if (isLoading.value) {
+                // Show a loader when loading
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    color = MaterialTheme.colorScheme.primary
+                )
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 64.dp)
+                        .padding(16.dp)
+                ) {
+                    item {
+                        Card(
                             modifier = Modifier
-                                .padding(16.dp)
                                 .fillMaxWidth()
+                                .padding(bottom = 16.dp)
+
                         ) {
-                            Text(text = "Today's Tips 💡", fontFamily = InriaSansFamily)
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = getWeatherTip(condition),
-                                fontFamily = InriaSansFamily
-                            )
+                            Column(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxWidth()
+                            ) {
+                                Text(text = "Today's Tips 💡", fontFamily = InriaSansFamily)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = getWeatherTip(condition),
+                                    fontFamily = InriaSansFamily
+                                )
+                            }
                         }
                     }
-                }
 
-                item(
-                ) {
-                    Text(text = "Daily Articles", fontFamily = InriaSansFamily)
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
+                    item(
+                    ) {
+                        Text(text = "Daily Articles", fontFamily = InriaSansFamily)
+                        Spacer(modifier = Modifier.height(16.dp))
+                    }
 
-                // Dynamic list of articles
-                items(articles.value.size) { index ->
-                    val article = articles.value[index]
-                    ArticleItem(
-                        context,
-                        articleId = index.toString(),
-                        title = article.title,
-                        publisher = article.source.name,
-                        date = article.publishedAt
-                    )
+                    // Dynamic list of articles
+                    items(articles.value.size) { index ->
+                        val article = articles.value[index]
+                        ArticleItem(
+                            context,
+                            articleId = index.toString(),
+                            title = article.title,
+                            publisher = article.source.name,
+                            date = article.publishedAt
+                        )
+                    }
                 }
             }
-
         }
     }
 }
