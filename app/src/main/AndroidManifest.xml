@@ -32,6 +32,7 @@
         <activity android:name=".activity.ArticleDetailActivity" />
         <activity android:name=".activity.DeviceActivity" />
         <activity android:name=".activity.MonitoringActivity" />
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
         <activity android:name=".activity.WebViewActivity" />
 
     </application>

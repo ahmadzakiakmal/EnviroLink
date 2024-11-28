@@ -102,40 +102,40 @@
 
                 Box(modifier = Modifier.fillMaxSize()) {
                     DeviceScreen(
-                        isLoggedIn = true,
-                        devices = devices,
-                        onLoginClick = { },
-                        scanQrCode = {
-                            when {
-                                ContextCompat.checkSelfPermission(
-                                    context,
-                                    Manifest.permission.CAMERA
-                                ) == PackageManager.PERMISSION_GRANTED -> {
-                                    showModal = false
-                                    showCamera = true
-
-                                    startCamera { qrCodeText ->
-                                        showCamera = false
-
-                                        isLoading = true
-                                        scannedQrCode = qrCodeText
-
-                                        Handler(Looper.getMainLooper()).postDelayed({
-                                            deviceViewModel.updateDeviceDetails(id=scannedQrCode)
-                                            isLoading = false
-                                            showModal = true
-                                            Toast.makeText(context, "QR Code Scanned", Toast.LENGTH_SHORT).show()
-                                        }, 1000)
-                                    }
-                                }
-                                else -> {
-                                    requestPermissionLauncher.launch(Manifest.permission.CAMERA)
-                                }
-                            }
-                        },
-                        showModal = showModal,
-                        onShowModalChange = { showModal = it },
-                        viewModel = deviceViewModel
+//                        isLoggedIn = true,
+//                        devices = devices,
+//                        onLoginClick = { },
+//                        scanQrCode = {
+//                            when {
+//                                ContextCompat.checkSelfPermission(
+//                                    context,
+//                                    Manifest.permission.CAMERA
+//                                ) == PackageManager.PERMISSION_GRANTED -> {
+//                                    showModal = false
+//                                    showCamera = true
+//
+//                                    startCamera { qrCodeText ->
+//                                        showCamera = false
+//
+//                                        isLoading = true
+//                                        scannedQrCode = qrCodeText
+//
+//                                        Handler(Looper.getMainLooper()).postDelayed({
+//                                            deviceViewModel.updateDeviceDetails(id=scannedQrCode)
+//                                            isLoading = false
+//                                            showModal = true
+//                                            Toast.makeText(context, "QR Code Scanned", Toast.LENGTH_SHORT).show()
+//                                        }, 1000)
+//                                    }
+//                                }
+//                                else -> {
+//                                    requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+//                                }
+//                            }
+//                        },
+//                        showModal = showModal,
+//                        onShowModalChange = { showModal = it },
+//                        viewModel = deviceViewModel
                     )
 
                     if (isLoading) {
