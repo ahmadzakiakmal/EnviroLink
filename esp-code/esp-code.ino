@@ -14,6 +14,7 @@ const char* mqttUser = "EnviroLink-0001";
 const char* mqttPassword = "EnviroLink-0001";
 const char* temperatureTopic = "EnviroLink-0001/temperature";
 const char* humidityTopic = "EnviroLink-0001/humidity";
+const char* iqaTopic = "EnviroLink-0001/iqa";
 
 WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
@@ -47,6 +48,7 @@ void loop() {
   float h = dht.readHumidity();
   float t = dht.readTemperature();
   float f = dht.readTemperature(true);
+  int iqa = random(170, 190);
 
   if (isnan(h) || isnan(t) || isnan(f)) {
     Serial.println("Failed to read from DHT sensor!");
@@ -62,6 +64,7 @@ void loop() {
 
   mqttClient.publish(temperatureTopic, tempStr.c_str());
   mqttClient.publish(humidityTopic, humidityStr.c_str());
+  mqttClient.publish(iqaTopic, String(iqa).c_str());
 
   Serial.print("Humidity: ");
   Serial.print(h);
@@ -73,7 +76,9 @@ void loop() {
   Serial.print(hic);
   Serial.print("°C ");
   Serial.print(hif);
-  Serial.println("°F");
+  Serial.print("°F,");
+  Serial.print("IQA (random): ");
+  Serial.println(iqa);
 
   mqttClient.loop();
 }
