@@ -30,7 +30,7 @@ fun BottomNavBar(
     val isInHomePage = currentActivity == Pages.HOME.activityName || currentActivity == Pages.MAIN.activityName
     val isInWeatherPage = currentActivity == Pages.WEATHER.activityName
     val isInArticlePage = currentActivity == Pages.WEATHERTIPS.activityName
-    val isInDeviceListPage = currentActivity == Pages.DEVICELIST.activityName
+    val isInDeviceListPage = currentActivity == Pages.DEVICELIST.activityName || currentActivity == Pages.MONITORING.activityName
 
     Box(
         modifier = Modifier

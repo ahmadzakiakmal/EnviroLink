@@ -5,7 +5,8 @@ enum class Pages(val activityName: String) {
     MAIN("MainActivity"),
     WEATHER("WeatherActivity"),
     WEATHERTIPS("WeatherTipsActivity"),
-    DEVICELIST("DeviceActivity");
+    DEVICELIST("DeviceActivity"),
+    MONITORING("MonitoringActivity");
 
     override fun toString(): String {
         return activityName
